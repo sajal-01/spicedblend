@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Sidebar() {
+  const total = useSelector((state) => state?.cart);
+  console.log('total', total);
   const [basket, setBasket] = useState(
     localStorage.getItem('basket')
       ? JSON.parse(localStorage.getItem('basket')).length
@@ -31,8 +34,9 @@ export default function Sidebar() {
         basket[index].price = Number(basket[index].price) + Number(item.price);
       } else if (type === 'remove' && basket[index].qty > 1) {
         basket[index].qty -= 1;
-        basket[index].price =
-          Number(basket[index].price) - Number(item.originalPrice);
+        basket[index].price = (
+          Number(basket[index].price) - Number(item.originalPrice)
+        ).toFixed(2);
       }
 
       localStorage.setItem('basket', JSON.stringify(basket));
@@ -45,7 +49,7 @@ export default function Sidebar() {
   return (
     <div>
       <button type="button" data-hs-overlay="#hs-overlay-right">
-        BASKET ({basket})
+        BASKET ({total?.length ? total?.length : 0})
       </button>
       <div
         id="hs-overlay-right"
@@ -56,7 +60,7 @@ export default function Sidebar() {
           <h3 className="uppercase text-[20px] leading-[25px] text-gray-800 ">
             BASKET{' '}
             <span className="italic">
-              ({basketItems?.length ? basketItems.length : 0})
+              ({total?.length ? total?.length : 0})
             </span>
           </h3>
           <button
@@ -81,13 +85,13 @@ export default function Sidebar() {
           </button>
         </div>
         <div className="p-4">
-          {basketItems?.length > 0 ? (
+          {total?.length > 0 ? (
             <div className="relative flex flex-col min-h-[90vh] text-center text-gray-800">
               <div className="text-gray-500 border-b-4 border-black font-light text-[16px] leading-[20px] tracking-[0.48px] text-left pb-2 ">
                 Congratulations! You've got free delivery
               </div>
               <div className="mt-4">
-                {basketItems?.map((item, index) => (
+                {total?.map((item, index) => (
                   <div className="flex flex-col items-start justify-start w-full mb-10 font-light text-stone-900 ">
                     <div className="flex items-center justify-between">
                       <img src={item?.images[0]} className="h-16 w-11 " />

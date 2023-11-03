@@ -13,7 +13,11 @@ import trio_img2 from '../assets/product/trio/img2.webp';
 import trio_img3 from '../assets/product/trio/img3.webp';
 import trio_img4 from '../assets/product/trio/img4.webp';
 
+import { addProductToBasket } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+
 export default function Page() {
+  const dispatch = useDispatch();
   const tabs = [
     {
       id: 1,
@@ -115,6 +119,11 @@ export default function Page() {
     } else {
       localStorage.setItem('basket', JSON.stringify([product]));
     }
+
+    dispatch({
+      type: 'ADD_PRODUCT_TO_BASKET',
+      payload: product,
+    });
   };
 
   return (
