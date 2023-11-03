@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
+import './index.css';
 import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
 import Page from './pages/Page';
 
-function App() {
+export default function App() {
   useEffect(() => {
     import('preline');
   }, []);
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div>
       <AnnouncementBar />
       <Navbar />
       <Page />
     </div>
   );
 }
-
-export default App;
