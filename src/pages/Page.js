@@ -130,13 +130,14 @@ export default function Page() {
     <div className="py-20 font-light text-stone-900 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[85rem] mx-auto">
         <div className="w-full col-span-2  h-[48vh] relative  ">
-          <img
-            src={currentImg}
-            alt={product.title}
-            className="object-contain w-full h-[35rem] "
-          />
-
-          <div className="absolute flex items-center justify-center w-full h-full top-[30rem] ">
+          <div className="relative mt-10 oval">
+            <img
+              src={currentImg}
+              alt={product.title}
+              className="object-contain top-10 bottom-0 -left-10  -rotate-90 absolute w-full h-[40rem] "
+            />
+          </div>
+          <div className="absolute flex items-center justify-center w-full h-full top-[43rem] ">
             {product.images.map((item, index) => (
               <button
                 key={index}
@@ -148,7 +149,7 @@ export default function Page() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col col-span-1 w-[28rem]">
+        <div className="flex flex-col mt-40 col-span-1 w-[28rem]">
           <div className="text-sm font-medium text-center text-gray-500 border-b border-black ">
             <ul className="flex flex-wrap -mb-px space-x-12 ">
               {tabs.map((item) => (
