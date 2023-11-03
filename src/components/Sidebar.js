@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increaseProductQty, decreaseProductQty } from '../redux/actions';
 
 export default function Sidebar() {
-  const total = useSelector((state) => state?.cart);
+  const total = useSelector((state) => state?.totalItems);
   const cart = useSelector((state) => state?.cart);
   const subtotal = useSelector((state) => state?.total);
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function Sidebar() {
   return (
     <div>
       <button type="button" data-hs-overlay="#hs-overlay-right">
-        BASKET ({total?.length ? total?.length : 0})
+        BASKET ({total ? total : 0})
       </button>
       <div
         id="hs-overlay-right"
@@ -42,10 +42,7 @@ export default function Sidebar() {
       >
         <div className="flex items-center justify-between px-4 py-3 border-b ">
           <h3 className="uppercase text-[20px] leading-[25px] text-gray-800 ">
-            BASKET{' '}
-            <span className="italic">
-              ({total?.length ? total?.length : 0})
-            </span>
+            BASKET <span className="italic">({total ? total : 0})</span>
           </h3>
           <button
             type="button"
@@ -69,13 +66,13 @@ export default function Sidebar() {
           </button>
         </div>
         <div className="p-4">
-          {total?.length > 0 ? (
+          {total > 0 ? (
             <div className="relative flex flex-col min-h-[90vh] text-center text-gray-800">
               <div className="text-gray-500 border-b-4 border-black font-light text-[16px] leading-[20px] tracking-[0.48px] text-left pb-2 ">
                 Congratulations! You've got free delivery
               </div>
               <div className="mt-4">
-                {total?.map((item, index) => (
+                {cart?.map((item, index) => (
                   <div className="flex flex-col items-start justify-start w-full mb-10 font-light text-stone-900 ">
                     <div className="flex items-center justify-between">
                       <img src={item?.images[0]} className="h-16 w-11 " />

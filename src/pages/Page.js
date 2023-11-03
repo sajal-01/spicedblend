@@ -189,7 +189,6 @@ export default function Page() {
           <button
             onClick={() => handleAddToBasket(product)}
             type="button"
-            disabled={cart?.find((item) => item.id === product.id)}
             className="px-4 py-2 text-[22px] leading-[24px] text-white bg-stone-900 rounded-3xl hover:bg-[#2455f6] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             £{product.price}- Add to Bag
