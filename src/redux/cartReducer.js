@@ -33,9 +33,10 @@ const cartReducer = (state = initialState, action) => {
     };
   }
   if (action.type === 'DECREASE_PRODUCT_QTY') {
-    console.log('action.payload', action.payload?.originalPrice);
+    console.log('Previous state:', state);
 
     if (action.payload.qty === 1) {
+      console.log('Removing item from cart...');
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload.id),
@@ -43,6 +44,8 @@ const cartReducer = (state = initialState, action) => {
         totalItems: state.totalItems - 1,
       };
     }
+
+    console.log('Updating item quantity...');
     return {
       ...state,
       cart: state.cart.map((item) =>
@@ -52,6 +55,7 @@ const cartReducer = (state = initialState, action) => {
       totalItems: state.totalItems - 1,
     };
   }
+
   return state;
 };
 

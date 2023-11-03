@@ -4,30 +4,12 @@ import { increaseProductQty, decreaseProductQty } from '../redux/actions';
 
 export default function Sidebar() {
   const total = useSelector((state) => state?.cart);
+  const cart = useSelector((state) => state?.cart);
   const subtotal = useSelector((state) => state?.total);
   const dispatch = useDispatch();
-  console.log('total', total);
-  const [basket, setBasket] = useState(
-    localStorage.getItem('basket')
-      ? JSON.parse(localStorage.getItem('basket')).length
-      : 0
-  );
-  const [basketItems, setBasketItems] = useState([]);
-  useEffect(() => {
-    const basket = localStorage.getItem('basket');
-    setBasket(basket ? JSON.parse(basket)?.length : 0);
-    if (basket) {
-      setBasketItems(JSON.parse(basket));
-    }
-  }, []);
 
   const handleUpdateQty = (item, type) => {
-    let basket = localStorage.getItem('basket');
-    if (!basket) {
-      basket = [];
-    } else {
-      basket = JSON.parse(basket);
-    }
+    let basket = cart;
 
     const index = basket.findIndex((x) => x.id === item.id);
 
@@ -37,7 +19,7 @@ export default function Sidebar() {
           type: 'INCREASE_PRODUCT_QTY',
           payload: item,
         });
-      } else if (type === 'remove' && basket[index].qty > 1) {
+      } else if (type === 'remove') {
         dispatch({
           type: 'DECREASE_PRODUCT_QTY',
           payload: item,
@@ -46,9 +28,6 @@ export default function Sidebar() {
 
       localStorage.setItem('basket', JSON.stringify(basket));
     }
-
-    // Update the state or do whatever you need to do with the updated basket items
-    setBasketItems([...basket]);
   };
 
   return (
