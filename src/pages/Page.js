@@ -14,10 +14,11 @@ import trio_img3 from '../assets/product/trio/img3.webp';
 import trio_img4 from '../assets/product/trio/img4.webp';
 
 import { addProductToBasket } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Page() {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state?.cart);
   const tabs = [
     {
       id: 1,
@@ -130,11 +131,11 @@ export default function Page() {
     <div className="py-20 font-light text-stone-900 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[85rem] mx-auto">
         <div className="w-full col-span-2  h-[48vh] relative  ">
-          <div className="relative mt-10 oval">
+          <div className="relative mt-24 oval">
             <img
               src={currentImg}
               alt={product.title}
-              className="object-contain top-10 bottom-0 -left-10  -rotate-90 absolute w-full h-[40rem] "
+              className="object-contain top-12 bottom-0 -left-10  -rotate-90 absolute w-full h-[35rem] "
             />
           </div>
           <div className="absolute flex items-center justify-center w-full h-full top-[43rem] ">
@@ -188,7 +189,8 @@ export default function Page() {
           <button
             onClick={() => handleAddToBasket(product)}
             type="button"
-            className="px-4 py-2 text-[22px] leading-[24px] text-white bg-stone-900 rounded-3xl hover:bg-[#2455f6]"
+            disabled={cart?.find((item) => item.id === product.id)}
+            className="px-4 py-2 text-[22px] leading-[24px] text-white bg-stone-900 rounded-3xl hover:bg-[#2455f6] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             £{product.price}- Add to Bag
           </button>
