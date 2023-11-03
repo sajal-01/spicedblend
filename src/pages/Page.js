@@ -22,7 +22,9 @@ export default function Page() {
       madeWidth: 'British Gin',
       place: 'Distilled in England',
       volume: '10%vol / 700ml',
-      price: '£29.95',
+      price: 29.95,
+      originalPrice: 29.95,
+      qty: 1,
       images: [london_dry_img1, london_dry_img2, london_dry_img3],
       description:
         "LONDON DRY is perfect for those who love a G&T. It's full of flavour but at 10% ABV it means you can enjoy the same ritual and taste but just with less alcohol. The unique combination of botanicals are steeped for 24 hours, then distilled, capturing the essential oils and big flavours. Before being masterfully blended with natural flavours to boost the character and provide a long refreshing finish at just 10%.",
@@ -38,7 +40,9 @@ export default function Page() {
       madeWidth: 'Caribbean Rum',
       place: 'Blended in England',
       volume: '10%vol / 700ml',
-      price: '£29.95',
+      price: 29.95,
+      originalPrice: 29.95,
+      qty: 1,
       images: [spiced_blend_img1, spiced_blend_img2, spiced_blend_img3],
       description:
         'Blending a duo of light and white Caribbean rums from Martinique and Dominican Republic as the smooth base. Spices are then added and the mix is allowed to steep for 2 days to draw out all of the flavour before being filtered and masterfully blended with natural distillates to 10%ABV. The result is a buttery, caramel-forward, savoury and spicy light spirit with a big impact both on the nose and the taste buds.',
@@ -54,7 +58,9 @@ export default function Page() {
       madeWidth: 'Heritage Botanicals',
       place: 'Macerated in England',
       volume: '10%vol / 700ml',
-      price: '£29.95',
+      price: 29.95,
+      originalPrice: 29.95,
+      qty: 1,
       images: [aperitif_img1, aperitif_img2, aperitif_img3],
       description:
         'Using a special combination of botanicals, from the hedgerow to the vegetable patch. Chosen to tickle the taste buds with interesting hints of approachable bitterness, but cleverly rounded off with the tart strawberry and sweet grape to create the most adult and uniquely moreish of aperitifs. We macerate the botanicals for 2 days to extract maximum flavour, before carefully blending with the real fruit juices to create this distinctly delicious flavour.',
@@ -70,7 +76,9 @@ export default function Page() {
       madeWidth: 'London Dry, Spiced Blend & Aperitif',
       place: 'Made in England',
       volume: '10%vol / 700ml x3',
-      price: '£79.85',
+      price: 79.85,
+      originalPrice: 79.85,
+      qty: 1,
       images: [trio_img1, trio_img2, trio_img3, trio_img4],
       description:
         'The complete tasting set. Made up of LONDON DRY heavy with juniper but light with citrus, rounded off with a subtle woody undertone. SPICED BLEND using a duo of light and white Caribbean rums from Martinique and Dominican Republic as its smooth base packed full of buttery dark caramel and spices. APERITIF a special combination of botanicals, from the hedgerow to the vegetable carefully blended with the floral sweetness of Strawberries.',
@@ -97,6 +105,18 @@ export default function Page() {
       return;
     } else setActive(id);
   };
+
+  const handleAddToBasket = (product) => {
+    const basket = localStorage.getItem('basket');
+    if (basket) {
+      const basketItems = JSON.parse(basket);
+      const newBasket = [...basketItems, product];
+      localStorage.setItem('basket', JSON.stringify(newBasket));
+    } else {
+      localStorage.setItem('basket', JSON.stringify([product]));
+    }
+  };
+
   return (
     <div className="py-20 font-light text-stone-900 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[85rem] mx-auto">
@@ -155,8 +175,12 @@ export default function Page() {
             {product.place}
             <span className="text-sm font-normal ">{product.volume}</span>
           </p>
-          <button className="px-4 py-2 text-[22px] leading-[24px] text-white bg-stone-900 rounded-3xl hover:bg-[#2455f6]">
-            {product.price}- Add to Bag
+          <button
+            onClick={() => handleAddToBasket(product)}
+            type="button"
+            className="px-4 py-2 text-[22px] leading-[24px] text-white bg-stone-900 rounded-3xl hover:bg-[#2455f6]"
+          >
+            £{product.price}- Add to Bag
           </button>
           <p className="text-[16px] leading-[20px] pt-2 pb-10 font-light text-center text-blue-500">
             FREE UK DELIVERY
