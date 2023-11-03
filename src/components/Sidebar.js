@@ -7,16 +7,16 @@ export default function Sidebar() {
         </button>
         <div
           id="hs-overlay-right"
-          className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 right-0 transition-all duration-300 transform h-full max-w-xs w-full w-full z-[60] bg-white border-l dark:bg-gray-800 dark:border-gray-700 hidden"
+          className="hs-overlay hs-overlay-open:translate-x-0 hidden translate-x-full fixed top-0 right-0 transition-all duration-300 transform h-full max-w-xs w-full  z-[60] bg-white border-l   "
           tabIndex={-1}
         >
-          <div className="flex items-center justify-between px-4 py-3 border-b dark:border-gray-700">
-            <h3 className="font-bold text-gray-800 dark:text-white">
-              BASKET (0)
+          <div className="flex items-center justify-between px-4 py-3 border-b ">
+            <h3 className="uppercase text-[20px] leading-[25px] text-gray-800 ">
+              BASKET <span className="italic">(0)</span>
             </h3>
             <button
               type="button"
-              className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-sm text-gray-500 rounded-md hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white dark:text-gray-500 dark:hover:text-gray-400 dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+              className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-sm text-gray-500 rounded-md hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white d"
               data-hs-overlay="#hs-overlay-right"
             >
               <span className="sr-only">Close modal</span>
@@ -37,7 +37,9 @@ export default function Sidebar() {
           </div>
           <div className="p-4">
             <p className="text-center text-gray-800">
-              <span className="text-gray-500 ">Your cart is empty</span>
+              <span className="text-gray-500 font-light text-[16px] leading-[20px] ">
+                Your cart is empty
+              </span>
             </p>
           </div>
         </div>
