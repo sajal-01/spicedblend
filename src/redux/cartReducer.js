@@ -33,12 +33,13 @@ const cartReducer = (state = initialState, action) => {
     };
   }
   if (action.type === 'DECREASE_PRODUCT_QTY') {
+    console.log('action.payload', action.payload);
     return {
       ...state,
       cart: state.cart.map((item) =>
         item.id === action.payload.id ? { ...item, qty: item.qty - 1 } : item
       ),
-      total: state.total - action.payload.price,
+      total: state.total - action.payload.originalPrice,
       totalItems: state.totalItems - 1,
     };
   }

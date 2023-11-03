@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { increaseProductQty, decreaseProductQty } from '../redux/actions';
 
 export default function Sidebar() {
   const total = useSelector((state) => state?.cart);
+  const subtotal = useSelector((state) => state?.total);
+  const dispatch = useDispatch();
   console.log('total', total);
   const [basket, setBasket] = useState(
     localStorage.getItem('basket')
@@ -30,13 +33,15 @@ export default function Sidebar() {
 
     if (index !== -1) {
       if (type === 'add') {
-        basket[index].qty += 1;
-        basket[index].price = Number(basket[index].price) + Number(item.price);
+        dispatch({
+          type: 'INCREASE_PRODUCT_QTY',
+          payload: item,
+        });
       } else if (type === 'remove' && basket[index].qty > 1) {
-        basket[index].qty -= 1;
-        basket[index].price = (
-          Number(basket[index].price) - Number(item.originalPrice)
-        ).toFixed(2);
+        dispatch({
+          type: 'DECREASE_PRODUCT_QTY',
+          payload: item,
+        });
       }
 
       localStorage.setItem('basket', JSON.stringify(basket));
@@ -121,7 +126,7 @@ export default function Sidebar() {
                         </button>
                       </div>
                       <span className="text-[20px] font-light">
-                        £{item?.price}
+                        £{(item?.price * item?.qty).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -131,10 +136,7 @@ export default function Sidebar() {
                 <div className="flex items-center justify-between pt-2">
                   <span className="text-[20px] font-light">Subtotal</span>
                   <span className="text-[20px] font-light">
-                    £
-                    {basketItems
-                      ?.reduce((acc, item) => acc + Number(item.price), 0)
-                      .toFixed(2)}
+                    £{subtotal?.toFixed(2)}
                   </span>
                 </div>
                 <button className="px-4 w-full mt-2 py-2 text-[22px] font-thin leading-[24px] text-white bg-stone-900 rounded-3xl hover:bg-[#2455f6]">
