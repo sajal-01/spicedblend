@@ -99,7 +99,7 @@ export default function Page() {
   };
   return (
     <div className="py-20 font-light text-stone-900 ">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[90rem] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[85rem] mx-auto">
         <div className="w-full col-span-2  h-[48vh] relative  ">
           <img
             src={currentImg}
