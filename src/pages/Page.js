@@ -100,14 +100,14 @@ export default function Page() {
   return (
     <div className="py-20 font-light text-stone-900 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-[90rem] mx-auto">
-        <div className="w-full col-span-2  h-[46vh] mt-20 ">
+        <div className="w-full col-span-2  h-[48vh] relative  ">
           <img
             src={currentImg}
             alt={product.title}
-            className="object-contain w-full h-full "
+            className="object-contain w-full h-[35rem] "
           />
 
-          <div className="flex items-center justify-center w-full h-full ">
+          <div className="absolute flex items-center justify-center w-full h-full top-[30rem] ">
             {product.images.map((item, index) => (
               <button
                 key={index}

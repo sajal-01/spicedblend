@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import './index.css';
 import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
 import Page from './pages/Page';
